@@ -4,10 +4,12 @@ import com.bancolombia.ms_stats.domain.dto.Hash;
 import com.bancolombia.ms_stats.domain.model.Stats;
 import com.bancolombia.ms_stats.domain.repository.ReactiveStatsRepository;
 import com.bancolombia.ms_stats.infraestructure.rest.handler.CustomHashException;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.time.Instant;
 
+@Service
 public class StatsService {
 
     private final ReactiveStatsRepository statsRepository;
