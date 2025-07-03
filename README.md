@@ -1,1 +1,53 @@
 # Stats-backend
+
+Para ejecutar el proyecto en local tener instalado RabbitMq y dynamoDB local
+
+usuario y contraseña de rabbitmq: guest
+
+cuando se ejecuta el programa, el mismo crea la tabla en la dynamoDB, solo es necesario
+que el dynamo este ejecutandose en local correctamente el el puerto 8000
+
+ENDPOINTS
+
+1. Guardar stats
+
+POST localhost:8080/stats
+{
+"totalContactoClientes": 252,
+"motivoReclamo": 25,
+"motivoGarantia": 11,
+"motivoDuda": 100,
+"motivoCompra": 100,
+"motivoFelicitaciones": 9,
+"motivoCambio": 8,
+"hash": "fda3f119e5c3805e5edb60b6d8e4812b"
+}
+
+2. Obtener stats
+
+POST localhost:8080/stats/2025-07-01T19:33:47.726948600Z
+
+reemplazar el 2025-07-01T19:33:47.726948600Z por uno que exista en DB cuando se guarde una stat
+
+3. Generar hash
+
+POST localhost:8080/stats/generar
+
+{
+"totalContactoClientes": 252,
+"motivoReclamo": 25,
+"motivoGarantia": 11,
+"motivoDuda": 100,
+"motivoCompra": 100,
+"motivoFelicitaciones": 9,
+"motivoCambio": 89
+}
+
+endpoint  adicional para generar hash con la info del body
+
+
+4. Obtener mensajes de la Rabbitmq
+
+GET http://localhost:8080/stats/mensajes
+
+lista mensajes de la cola de rabbit
