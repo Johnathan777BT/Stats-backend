@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  springboot-app:
+    image: eclipse-temurin_17_alpine
+    container_name: springboot-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dynamodb-local
+      - rabbitmq
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - DYNAMODB_ENDPOINT=http://dynamodb-local:8000
+      - RABBITMQ_HOST=rabbitmq
+
+  dynamodb-local:
+    image: amazon/dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest

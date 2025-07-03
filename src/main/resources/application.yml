@@ -1,0 +1,7 @@
+#spring.application.name=ms-stats
+spring:
+  profiles:
+    active: local
+  application:
+    name: ms-stats
+
