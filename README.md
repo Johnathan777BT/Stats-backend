@@ -29,7 +29,7 @@ guarda la estadistica en dynamo si el hash es valido, de lo contrario muestra un
 
 2. Obtener stats
 
-POST http://localhost:8080/stats/2025-07-01T19:33:47.726948600Z
+GET http://localhost:8080/stats/2025-07-01T19:33:47.726948600Z
 
 reemplazar el 2025-07-01T19:33:47.726948600Z por uno que exista en DB cuando se guarde una stat
 
