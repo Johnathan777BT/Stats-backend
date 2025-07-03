@@ -11,7 +11,9 @@ ENDPOINTS
 
 1. Guardar stats
 
-POST localhost:8080/stats
+POST http://localhost:8080/stats
+
+body: 
 {
 "totalContactoClientes": 252,
 "motivoReclamo": 25,
@@ -23,16 +25,19 @@ POST localhost:8080/stats
 "hash": "fda3f119e5c3805e5edb60b6d8e4812b"
 }
 
+guarda la estadistica en dynamo si el hash es valido, de lo contrario muestra un mensaje de error.
+
 2. Obtener stats
 
-POST localhost:8080/stats/2025-07-01T19:33:47.726948600Z
+POST http://localhost:8080/stats/2025-07-01T19:33:47.726948600Z
 
 reemplazar el 2025-07-01T19:33:47.726948600Z por uno que exista en DB cuando se guarde una stat
 
 3. Generar hash
 
-POST localhost:8080/stats/generar
+POST http://localhost:8080/stats/generar
 
+body:
 {
 "totalContactoClientes": 252,
 "motivoReclamo": 25,
