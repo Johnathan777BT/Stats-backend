@@ -51,3 +51,18 @@ endpoint  adicional para generar hash con la info del body
 GET http://localhost:8080/stats/mensajes
 
 lista mensajes de la cola de rabbit
+
+
+5. podman para ver tablas y registros de dynamo
+
+1. podman compose exec aws-cli sh
+2. sh-5.2#  aws configure
+Tip: You can deliver temporary credentials to the AWS CLI using your AWS Console session by running the command 'aws login'.
+
+AWS Access Key ID [None]: test
+AWS Secret Access Key [None]: test
+Default region name [None]: us-east-1
+Default output format [None]: json
+
+3. sh-5.2# aws dynamodb list-tables --endpoint-url http://dynamodb-local:8000 --region us-east-1
+4. sh-5.2# aws dynamodb scan --table-name stats --endpoint-url http://dynamodb-local:8000 --region us-east-1

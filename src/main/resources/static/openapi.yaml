@@ -1,0 +1,188 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Stats API",
+    "version": "1.0.0",
+    "description": "API para gestionar estadísticas y hashes."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/stats": {
+      "post": {
+        "summary": "Guarda una estadística",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stats"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Guardado exitoso"
+          },
+          "400": {
+            "description": "Error de validación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorRespuesta"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats/{timestamp}": {
+      "get": {
+        "summary": "Obtiene una estadística por timestamp",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "timestamp",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Estadística encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stats"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No encontrado"
+          }
+        }
+      }
+    },
+    "/stats/mensajes": {
+      "get": {
+        "summary": "Obtiene lista de mensajes",
+        "responses": {
+          "200": {
+            "description": "Lista de estadísticas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Stats"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats/generar": {
+      "post": {
+        "summary": "Calcula el hash de una estadística",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Stats"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Hash generado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hash"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error de hash",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorRespuesta"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Stats": {
+        "type": "object",
+        "properties": {
+          "totalContactoClientes": {
+            "type": "integer"
+          },
+          "motivoReclamo": {
+            "type": "integer"
+          },
+          "motivoGarantia": {
+            "type": "integer"
+          },
+          "motivoDuda": {
+            "type": "integer"
+          },
+          "motivoCompra": {
+            "type": "integer"
+          },
+          "motivoFelicitaciones": {
+            "type": "integer"
+          },
+          "motivoCambio": {
+            "type": "integer"
+          },
+          "hash": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "totalContactoClientes"
+        ]
+      },
+      "Hash": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorRespuesta": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "integer"
+          },
+          "mensaje": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

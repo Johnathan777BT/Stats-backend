@@ -1,7 +1,9 @@
 #spring.application.name=ms-stats
 spring:
   profiles:
-    active: local
+    active: dev
   application:
     name: ms-stats
+server:
+  address: 0.0.0.0
 

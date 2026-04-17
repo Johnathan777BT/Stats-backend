@@ -1,0 +1,7 @@
+FROM rabbitmq:3-management
+
+# Image marker for local ephemeral use
+LABEL org.opencontainers.image.title="rabbitmq-ephemeral"
+LABEL org.opencontainers.image.description="RabbitMQ for local development with ephemeral runtime data"
+
+# Keep default entrypoint/cmd from upstream image

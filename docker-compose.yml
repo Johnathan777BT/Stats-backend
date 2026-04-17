@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   springboot-app:
-    image: eclipse-temurin_17_alpine
+    image: ms-stats:latest
     container_name: springboot-app
     ports:
       - "8080:8080"
@@ -11,10 +11,8 @@ services:
       - rabbitmq
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - AWS_ACCESS_KEY_ID=test
-      - AWS_SECRET_ACCESS_KEY=test
       - DYNAMODB_ENDPOINT=http://dynamodb-local:8000
-      - RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_HOST=rabbitmq
 
   dynamodb-local:
     image: amazon/dynamodb-local
@@ -31,3 +29,14 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+  aws-cli:
+    image: amazon/aws-cli
+    container_name: aws-cli
+    depends_on:
+      - dynamodb-local
+    entrypoint: /bin/sh
+    tty: true
+    stdin_open: true
+    # Conectamos a la misma red interna de docker-compose
+    networks:
+      - default
